@@ -557,6 +557,26 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "Get All Fatture",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/fatture",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"fatture"
+							]
+						}
+					},
+					"response": []
 				}
 			],
 			"auth": {

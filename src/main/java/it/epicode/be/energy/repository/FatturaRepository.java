@@ -24,5 +24,7 @@ public interface FatturaRepository extends JpaRepository<Fattura, Long> {
 
 	@Query("Select f from Fattura f where f.importo between :min and :max")
 	public Page<Fattura> findByRange(BigDecimal min, BigDecimal max, Pageable pageable);
+	
+	public Page<Fattura> findAll(Pageable pageable);
 
 }

@@ -93,5 +93,9 @@ public class FatturaService {
 		}
 		return null; // TODO implementare eccezione relativa.
 	}
+	
+	public Page<Fattura> findAll(Pageable pageable) {
+		return fatturaRepo.findAll(pageable);
+	}
 
 }

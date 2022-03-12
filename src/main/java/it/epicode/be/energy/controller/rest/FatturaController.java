@@ -133,5 +133,19 @@ public class FatturaController {
 		}
 	
 	}
+	
+	@GetMapping(path = "/fatture")
+	@PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USER')")
+	@Operation(description = "Lista di tutte le fatture presenti nel Db")
+	public ResponseEntity<Page<Fattura>> findAll(Pageable pageable) {
+		
+		Page<Fattura> find = fatturaServ.findAll(pageable);		
+		if (find.hasContent()) {
+			return new ResponseEntity<>(find, HttpStatus.OK);
+		} else {
+			return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+		}
+	
+	}
 
 }
