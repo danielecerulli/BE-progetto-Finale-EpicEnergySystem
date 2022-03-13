@@ -19,7 +19,11 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 //import lombok.NonNull;
-
+/**
+ * Classe principale del progetto che identifica un cliente
+ * @author danie
+ *
+ */
 @Data
 @EqualsAndHashCode(callSuper = true)
 @AllArgsConstructor

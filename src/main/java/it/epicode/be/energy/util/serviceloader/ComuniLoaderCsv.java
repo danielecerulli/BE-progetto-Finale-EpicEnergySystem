@@ -18,7 +18,11 @@ import it.epicode.be.energy.model.Provincia;
 import it.epicode.be.energy.service.ComuneService;
 import it.epicode.be.energy.service.ProvinciaService;
 import lombok.extern.slf4j.Slf4j;
-
+/**
+ * Classe che permette di leggere e salvare le entries provenienti da file .csv
+ * @author danie
+ *
+ */
 @Slf4j
 @Service
 public class ComuniLoaderCsv {
