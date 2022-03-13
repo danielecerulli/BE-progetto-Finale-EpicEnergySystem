@@ -12,7 +12,9 @@ import org.springframework.web.bind.annotation.RestController;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import it.epicode.be.energy.util.serviceloader.ComuniLoaderCsv;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 @RestController
 @RequestMapping("/api")
 @SecurityRequirement(name = "bearerAuth")
@@ -25,7 +27,9 @@ public class ComuniLoaderController {
 	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@Operation(description = "Popola il DB con Province e Comuni (NECESSARIA AUTENTICAZIONE ED AUTORIZZAZIONE 'ADMIN'!)")
 	public void popola() throws FileNotFoundException, IOException {
-		comune.popola();
+		//log.info(comune.popola());
+		log.info("Start 'popolaComuni()'");
+		log.info(comune.popolaComuni());
 	}
 	
 	
