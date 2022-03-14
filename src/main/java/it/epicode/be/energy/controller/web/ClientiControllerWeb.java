@@ -18,6 +18,7 @@ import org.springframework.web.servlet.ModelAndView;
 import io.swagger.v3.oas.annotations.Operation;
 import it.epicode.be.energy.model.Cliente;
 import it.epicode.be.energy.service.ClienteService;
+import it.epicode.be.energy.service.IndirizzoService;
 import lombok.extern.slf4j.Slf4j;
 
 @Controller
@@ -29,7 +30,7 @@ public class ClientiControllerWeb {
 	ClienteService clienteServ;
 	
 	@Autowired
-	
+	IndirizzoService indirizzoServ;
 	
 	@GetMapping("/mostraelenco")
 	@Operation(description = "Mostra elenco clienti su pagina Thymeleaf")
