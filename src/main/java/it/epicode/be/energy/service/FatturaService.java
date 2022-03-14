@@ -10,6 +10,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import it.epicode.be.energy.exceptions.EnergyException;
 import it.epicode.be.energy.model.Fattura;
 import it.epicode.be.energy.repository.FatturaRepository;
 
@@ -75,8 +76,15 @@ public class FatturaService {
 		return fatturaRepo.save(fattura);
 	}
 
-	public void delete(Long id) {		
-		fatturaRepo.deleteById(id);
+	public void delete(Long id) {
+		Optional<Fattura> result = fatturaRepo.findById(id);
+		if (result.isPresent()) {
+			result.get().setCliente(null);
+			fatturaRepo.deleteById(id);
+		} else {
+			throw new EnergyException("Fattura non trovata/cancellata!");
+		}
+		
 	}
 	
 	public Fattura update(Long id, Fattura fattura) {
@@ -91,7 +99,9 @@ public class FatturaService {
 			update.setCliente(fattura.getCliente());
 			return fatturaRepo.save(update);
 		}
-		return null; // TODO implementare eccezione relativa.
+		else 
+			throw new EnergyException("Fattura non aggiornata");
+		//return null; // TODO implementare eccezione relativa.
 	}
 	
 	public Page<Fattura> findAll(Pageable pageable) {

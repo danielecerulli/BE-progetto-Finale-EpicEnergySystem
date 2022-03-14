@@ -33,7 +33,12 @@ public class ComuneService {
 	}
 
 	public void delete(Long id) {
-		comuneRepo.delete(comuneRepo.findById(id).get());
+		if (comuneRepo.findById(id).isPresent()) {
+			Comune c = comuneRepo.findById(id).get();
+			c.setProvincia(null);
+			comuneRepo.delete(c);
+		}
+
 	}
 
 	public Comune update(Long id, Comune comune) {

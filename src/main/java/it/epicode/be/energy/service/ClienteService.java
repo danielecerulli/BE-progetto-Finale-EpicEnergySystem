@@ -3,6 +3,7 @@ package it.epicode.be.energy.service;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +13,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import it.epicode.be.energy.exceptions.EnergyException;
 import it.epicode.be.energy.model.Cliente;
 import it.epicode.be.energy.model.Fattura;
 import it.epicode.be.energy.repository.ClienteRepository;
@@ -120,8 +122,16 @@ public class ClienteService {
 		return clienteRepo.save(cliente);
 	}
 	
-	public void delete(Long id) {		
-		fatturaRepo.deleteById(id);
+	public void delete(Long id) {
+		if (clienteRepo.findById(id).isPresent()) {
+			Cliente delete = clienteRepo.findById(id).get();
+			delete.setSedeLegale(null);
+			delete.setSedeOperativa(null);
+			clienteRepo.deleteById(id);
+		} else {
+			throw new EnergyException("Cliente non cancellato/trovato!");
+		}
+		
 	}
 	
 	public Cliente update(Long id, Cliente cliente) {
@@ -180,6 +190,14 @@ public class ClienteService {
 	
 	public Page<Cliente> findAll(Pageable pageable) {
 		return clienteRepo.findAll(pageable);
+	}
+	
+	public Optional<Cliente> findById(Long id) {
+		return clienteRepo.findById(id);
+	}
+	
+	public List<Cliente> findAll() {
+		return clienteRepo.findAll();
 	}
 	
 }

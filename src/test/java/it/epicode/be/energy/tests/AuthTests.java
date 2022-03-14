@@ -69,7 +69,7 @@ public class AuthTests {
 	@Test
 	@WithMockUser(username = "admin", password = "admin", roles = "ADMIN")
 	public void deleteComuneByAdmin() throws Exception {
-		this.mockMvc.perform(delete("/api/comune/9"))
+		this.mockMvc.perform(delete("/api/comune/97"))
 			.andExpect(status().isOk());
 	}
 	
