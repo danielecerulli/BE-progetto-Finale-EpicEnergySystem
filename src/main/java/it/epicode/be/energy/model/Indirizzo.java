@@ -24,7 +24,7 @@ public class Indirizzo extends BaseEntity {
 	private int civico;
 	private String localita;
 	private Long cap;
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.ALL)
 	@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 	private Comune comune;
 	

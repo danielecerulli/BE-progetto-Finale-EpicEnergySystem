@@ -121,14 +121,14 @@ public class ComuniLoaderCsv {
 				
 				for (Provincia p : province) {
 
-					if (p.getNome().equals(provinciaDelComune)) {
+					if (p.getNome().equals(provinciaDelComune) && !provinciaDelComune.isBlank()) {
 						c.setProvincia(p);
+						c.setNome(nomeComune);
+						comuneService.save(c);
 					}
-
-					c.setNome(nomeComune);
+					
 				}
-
-				comuneService.save(c);
+				
 			}
 
 		}

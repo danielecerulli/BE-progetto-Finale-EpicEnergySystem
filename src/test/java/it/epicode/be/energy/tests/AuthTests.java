@@ -37,7 +37,9 @@ public class AuthTests {
 	private MockMvc mockMvc;
 	
 	Comune c1;
+	Comune c2;
 	Provincia p1;
+	Provincia p2;
 	Indirizzo iSedLeg1;
 	Indirizzo iSedOpe1;
 	Cliente cl1;
@@ -131,9 +133,18 @@ public class AuthTests {
 		p1.setRegione("Piemonte");
 		p1.setSigla("TO");
 		
+		p2 = new Provincia();
+		p2.setNome("Torino");
+		p2.setRegione("Piemonte");
+		p2.setSigla("TO");
+		
 		c1 = new Comune();
 		c1.setNome("Agliè");
 		c1.setProvincia(p1);
+		
+		c2 = new Comune();
+		c2.setNome("Agliò");
+		c2.setProvincia(p2);
 		
 		iSedLeg1 = new Indirizzo();
 		iSedLeg1.setCap(110L);
@@ -145,12 +156,13 @@ public class AuthTests {
 		iSedOpe1 = new Indirizzo();
 		iSedOpe1.setCap(110L);
 		iSedOpe1.setCivico(789);
-		iSedOpe1.setComune(c1);
+		iSedOpe1.setComune(c2);
 		iSedOpe1.setLocalita("Agliè-alta");
 		iSedOpe1.setVia("via Test2");
 		
-		//cl1.setSedeLegale(iSedLeg1);
-		//cl1.setSedeOperativa(iSedOpe1);	
+		cl1.setSedeLegale(iSedLeg1);
+		cl1.setSedeOperativa(iSedOpe1);	
+		System.out.println("Ciao");
 	}
 	
 	@BeforeEach

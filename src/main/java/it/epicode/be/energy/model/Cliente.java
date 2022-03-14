@@ -40,24 +40,18 @@ public class Cliente extends BaseEntity {
 	private BigDecimal fatturatoAnnuale;
 	private String pec;
 	private String telefono;
+	@Enumerated(EnumType.STRING)
+	private TipoCliente tipoCliente;	
+	private String emailContatto;
+	private String nomeContatto;
+	private String cognomeContatto;
+	private String telefonoContatto;
 	
 	@OneToOne(cascade = CascadeType.ALL)
 	private Indirizzo sedeLegale;
 	
 	@OneToOne(cascade= CascadeType.ALL)
 	private Indirizzo sedeOperativa;	
-
-	@Enumerated(EnumType.STRING)
-	private TipoCliente tipoCliente;
-	
-	
-	/*@OneToOne(cascade=CascadeType.ALL)
-	private Contatto contatto;*/
-	
-	private String emailContatto;
-	private String nomeContatto;
-	private String cognomeContatto;
-	private String telefonoContatto;
 	
 	public final void setDataInserimento() {
 		this.dataInserimento=new Date();

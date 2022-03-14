@@ -16,6 +16,7 @@ import it.epicode.be.energy.model.Cliente;
 import it.epicode.be.energy.model.Fattura;
 import it.epicode.be.energy.repository.ClienteRepository;
 import it.epicode.be.energy.repository.FatturaRepository;
+import it.epicode.be.energy.repository.IndirizzoRepository;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -27,6 +28,9 @@ public class ClienteService {
 	
 	@Autowired
 	FatturaRepository fatturaRepo;
+	
+	@Autowired
+	IndirizzoRepository indirizzoRepo;
 
 	
 	public Page<Cliente> findByParteNome(String nome, Pageable pageable) {

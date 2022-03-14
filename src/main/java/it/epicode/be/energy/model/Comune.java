@@ -1,5 +1,6 @@
 package it.epicode.be.energy.model;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 
@@ -21,7 +22,7 @@ import lombok.NoArgsConstructor;
 public class Comune extends BaseEntity {
 	
 	private String nome;
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.ALL)
 	@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 	private Provincia provincia;
 }

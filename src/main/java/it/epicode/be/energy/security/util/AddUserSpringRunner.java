@@ -42,27 +42,32 @@ public class AddUserSpringRunner implements CommandLineRunner {
 		User userU = new User();
 		Set<Role> rolesU = new HashSet<>();
 		rolesU.add(roleU);
+		if ( !userRepository.findByUserName("user").isPresent() ) {
+			
+			userU.setNome("Luigi");
+			userU.setCognome("Verdi");
+			userU.setUserName("user");
+			userU.setPassword(bCrypt.encode("user"));
+			userU.setEmail("user@gmail.com");
+			userU.setRoles(rolesU);
+			userU.setActive(true);
+			roleRepository.save(roleU);
+			userRepository.save(userU);	
+			
+		}
 		
-		userU.setNome("Luigi");
-		userU.setCognome("Verdi");
-		userU.setUserName("user");
-		userU.setPassword(bCrypt.encode("user"));
-		userU.setEmail("user@gmail.com");
-		userU.setRoles(rolesU);
-		userU.setActive(true);
+		if ( !userRepository.findByUserName("admin").isPresent() ) {
+			userA.setNome("Mario");
+			userA.setCognome("Rossi");
+			userA.setUserName("admin");
+			userA.setPassword(bCrypt.encode("admin"));
+			userA.setEmail("admin@domain.com");
+			userA.setRoles(rolesA);
+			userA.setActive(true);		
+			roleRepository.save(roleA);
+			userRepository.save(userA);
+		}
 		
-		userA.setNome("Mario");
-		userA.setCognome("Rossi");
-		userA.setUserName("admin");
-		userA.setPassword(bCrypt.encode("admin"));
-		userA.setEmail("admin@domain.com");
-		userA.setRoles(rolesA);
-		userA.setActive(true);
-		
-		roleRepository.save(roleU);
-		roleRepository.save(roleA);
-		userRepository.save(userA);
-		userRepository.save(userU);
 	}
 
 }
