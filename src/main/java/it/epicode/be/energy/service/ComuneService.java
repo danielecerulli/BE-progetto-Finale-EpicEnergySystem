@@ -1,5 +1,6 @@
 package it.epicode.be.energy.service;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +27,10 @@ public class ComuneService {
 
 	public Page<Comune> findAll(Pageable pageable) {
 		return comuneRepo.findAll(pageable);
+	}
+	
+	public List<Comune> findAll() {
+		return comuneRepo.findAll();
 	}
 
 	public Optional<Comune> findById(Long id) {

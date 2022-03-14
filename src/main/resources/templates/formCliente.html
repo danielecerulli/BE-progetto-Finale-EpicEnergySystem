@@ -59,19 +59,53 @@
 		Telefono Contatto: <input type="text" th:field="*{telefonoContatto}" />
 	</p><br>
 	
+	<p>
+		Via sede legale: <input type="text" th:field="*{sedeLegale.via}" />
+	</p>
 	
-	<!--  <label >Corso:</label>
-	<select th:field="*{corso}">
-  <option  th:value="fisica" th:text="fisica">Fisica</option>
-  <option  th:value="lettere" th:text="lettere">Lettere</option>
-  <option  th:value="chimica" th:text="chimica">Chimica</option>
-   </select>-->
+	<p>
+		Numero Civico sede legale: <input type="text" th:field="*{sedeLegale.civico}" />
+	</p>
+	
+	<p>
+		Cap sede legale: <input type="text" th:field="*{sedeLegale.cap}" />
+	</p>
+	
+	<p>
+		Località sede legale: <input type="text" th:field="*{sedeLegale.localita}" />
+	</p>
+	
+	<p>
+		Comune sede legale: <input type="text" th:field="*{sedeLegale.comune.nome}" />
+	</p><br>
+	
+	<p>
+		Via sede operativa: <input type="text" th:field="*{sedeOperativa.via}" />
+	</p>
+	
+	<p>
+		Numero Civico sede operativa: <input type="text" th:field="*{sedeOperativa.civico}" />
+	</p>
+	
+	<p>
+		Cap sede operativa: <input type="text" th:field="*{sedeOperativa.cap}" />
+	</p>
+	
+	<p>
+		Località sede operativa: <input type="text" th:field="*{sedeOperativa.localita}" />
+	</p>
+	
+	<p>
+		Comune sede operativa: <input type="text" th:field="*{sedeOperativa.comune.nome}" />
+	</p>
+	
+	
    
-  Indirizzo Sede Legale: <select th:field="*{indirizzoSedeLegale}" name="indirizzo">
+  <!--  Indirizzo Sede Legale: <select th:field="*{indirizzoSedeLegale}" name="indirizzo">
 	<option th:each="i : ${listaIndirizzi}"
     th:value="${i.id}"
     th:text="${i.toString()}" />
-    </select><br>
+    </select><br> -->
     
     <!-- Indirizzo Sede Operativa: <select th:field="*{indirizzoSedeOperativa}" name="indirizzo">
 	<option th:each="i : ${listaIndirizzi}"
@@ -83,13 +117,6 @@
     th:text="${i.comune}" />
     </select><br>-->
     
-     
-  
- <!-- <select name="corso" id="corso" required>
-  <option  value="fisica">Fisica</option>
-  <option  value="lettere">Lettere</option>
-  <option  value="chimica">Chimica</option>
-   </select> -->
 	
 	<p>
 		<input type="submit" value="Submit" /> <input type="reset" value="Reset" />

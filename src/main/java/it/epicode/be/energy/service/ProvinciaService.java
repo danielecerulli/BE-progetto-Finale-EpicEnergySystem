@@ -1,5 +1,6 @@
 package it.epicode.be.energy.service;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,6 +32,10 @@ public class ProvinciaService {
 
 	public Page<Provincia> findAll(Pageable pageable) {
 		return provinciaRepo.findAll(pageable);
+	}
+	
+	public List<Provincia> findAll() {
+		return provinciaRepo.findAll();
 	}
 
 	public Optional<Provincia> findById(Long id) {

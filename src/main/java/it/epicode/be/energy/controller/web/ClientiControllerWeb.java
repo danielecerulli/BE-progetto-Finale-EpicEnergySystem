@@ -35,7 +35,7 @@ public class ClientiControllerWeb {
 	@GetMapping("/mostraelenco")
 	@Operation(description = "Mostra elenco clienti su pagina Thymeleaf")
 	public ModelAndView mostraElencoClienti(Pageable pageable) {
-		log.info("Elenco comuni su pagina Thymeleaf");
+		log.info("Elenco clienti su pagina Thymeleaf");
 		ModelAndView view = new ModelAndView("elencoclienti");
 		view.addObject("listaClienti", clienteServ.findAll(pageable));
 		return view;
@@ -53,35 +53,13 @@ public class ClientiControllerWeb {
 		log.info("Action aggiunta cliente");
 		if (result.hasErrors()) {
 			//model.addAttribute("listaIndirizzi", clienteServ.findAll());
-			return "formStudente";
+			return "formCliente";
 		}
 		clienteServ.save(cliente);
 		return "redirect:/clienti/mostraelenco";
 	}
 	
-	@GetMapping("/mostraformaggiorna/{id}")
-	public ModelAndView mostraFormAggiorna(@PathVariable Long id, Model model) {
-		log.info("Mostra form aggiorna cliente");
-		
-		Optional<Cliente> clienteTemp = clienteServ.findById(id);
-		if (clienteTemp.isPresent()) {
-			ModelAndView view = new ModelAndView("editCliente");
-			view.addObject("cliente", clienteTemp.get());
-			//view.addObject("listaIndirizzi", clienteServ.findAll());
-			return view;
-		}
-		return new ModelAndView("error").addObject("message","Cliente con id " + id + " non trovato!");
-	}
-
-	@PostMapping("/updateCliente/{id}")
-	public String aggiornaCliente(@PathVariable Long id, Cliente cliente, BindingResult result,
-			Model model) {
-		clienteServ.update(id, cliente);
-		log.info("Cliente aggiorna");
-		return "redirect:/clienti/mostraelenco";
-
-	}
-
+	
 	@GetMapping("/eliminacliente/{id}")
 	public ModelAndView eliminaCliente(@PathVariable Long id, Model model) {
 		Optional<Cliente> clienteTempElim = clienteServ.findById(id);

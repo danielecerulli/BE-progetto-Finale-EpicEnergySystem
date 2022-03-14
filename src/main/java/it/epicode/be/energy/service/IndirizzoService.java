@@ -1,5 +1,6 @@
 package it.epicode.be.energy.service;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +20,10 @@ public class IndirizzoService {
 	
 	public Page<Indirizzo> findAll(Pageable pageable) {
 		return indirizzoRepo.findAll(pageable);
+	}
+	
+	public List<Indirizzo> findAll() {
+		return indirizzoRepo.findAll();
 	}
 	
 	public Optional<Indirizzo> findById(Long id) {
