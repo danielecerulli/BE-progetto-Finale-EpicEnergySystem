@@ -11,6 +11,8 @@ import it.epicode.be.energy.model.Provincia;
 
 @Repository
 public interface ProvinciaRepository extends JpaRepository<Provincia, Long> {
-	Optional<Provincia> findBySigla(String sigla);
+	public Optional<Provincia> findBySigla(String sigla);
 	public Page<Provincia> findByRegione(String regione, Pageable pageable);
+	public Optional<Provincia> findByNome(String nome);
+	
 }

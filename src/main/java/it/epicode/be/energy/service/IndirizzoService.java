@@ -53,8 +53,7 @@ public class IndirizzoService {
 			update.setComune(indirizzo.getComune());
 			update.setVia(indirizzo.getVia());
 			update.setLocalita(indirizzo.getLocalita());
-			update.setId(update.getId());
-			return update;
+			return indirizzoRepo.save(update);
 		}
 		else {
 			throw new EnergyException("Indirizzo non trovato/aggiornato!");
