@@ -24,7 +24,7 @@ public class UserController {
 
 	@GetMapping("/user/{id}")
 	@PreAuthorize("hasRole('ROLE_ADMIN')")
-	public ResponseEntity<User> findById(@PathVariable(required = true) Integer id) {
+	public ResponseEntity<User> findById(@PathVariable(required = true) Long id) {
 		Optional<User> find = userService.findById(id);
 
 		if (find.isPresent()) {

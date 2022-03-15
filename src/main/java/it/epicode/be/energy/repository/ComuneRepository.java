@@ -1,5 +1,6 @@
 package it.epicode.be.energy.repository;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.data.domain.Page;
@@ -12,4 +13,5 @@ public interface ComuneRepository extends JpaRepository<Comune, Long> {
 	public Optional<Comune> findByNome(String nome);
 	public Page<Comune> findAll(Pageable pageable);
 	public Page<Comune> findByProvinciaSigla(String sigla, Pageable pageable);
+	public List<Comune> findAll();
 }

@@ -8,7 +8,7 @@ import it.epicode.be.energy.security.model.User;
 
 public interface UserRepository extends JpaRepository<User, Integer> {
 
-	public Optional<User> findById(Integer id);
+	public Optional<User> findById(Long id);
 
 	public Optional<User> findByUserName(String userName);
 
