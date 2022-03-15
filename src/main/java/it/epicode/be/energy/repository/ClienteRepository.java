@@ -27,6 +27,8 @@ public interface ClienteRepository extends JpaRepository<Cliente, Long> {
 	public Page<Cliente> findAll(Pageable pageable);
 
 	public Page<Cliente> findAllSortedByFatturatoAnnuale(int anno, Pageable pageable);
+	
+	public Page<Cliente> findByOrderByFatturatoAnnualeDesc(Pageable pageable);
 
 	public Page<Cliente> findByDataInserimento(int d, int m, int y, Pageable pageable);
 

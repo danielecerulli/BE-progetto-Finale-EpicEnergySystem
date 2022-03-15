@@ -162,5 +162,19 @@ public class ClienteController {
 		}
 
 	}
+	
+	@GetMapping(path = "/allclienteorderbyfatturatoannuale")
+	@PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USER')")
+	@Operation(description = "Ricerca di tutti i clienti con ordinamento in base al fatturato annuale (discendente)")
+	public ResponseEntity<Page<Cliente>> findByOrderByFatturatoAnnualeDesc(Pageable pageable) {
+		Page<Cliente> find = clienteServ.findByOrderByFatturatoAnnualeDesc(pageable);
+
+		if (find.hasContent()) {
+			return new ResponseEntity<>(find, HttpStatus.OK);
+		} else {
+			return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+		}
+
+	}
 
 }

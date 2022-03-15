@@ -188,6 +188,21 @@ public class ClienteService {
 	
 	}
 	
+	public Page<Cliente> findByOrderByFatturatoAnnualeDesc(Pageable pageable) {
+		try {
+			Page<Cliente> clienti = clienteRepo.findByOrderByFatturatoAnnualeDesc(pageable);
+			if (clienti.hasContent()) {
+				return clienti;
+			}
+			log.error("Nessun cliente trovato!");
+			return null;
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new RuntimeException(e.getMessage());
+		}
+	
+	}
+	
 	public Page<Cliente> findAll(Pageable pageable) {
 		return clienteRepo.findAll(pageable);
 	}
