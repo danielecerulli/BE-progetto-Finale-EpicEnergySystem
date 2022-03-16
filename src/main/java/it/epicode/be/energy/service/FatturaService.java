@@ -3,6 +3,7 @@ package it.epicode.be.energy.service;
 import java.math.BigDecimal;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,6 +32,10 @@ public class FatturaService {
 			throw new RuntimeException(e.getMessage());
 		}
 
+	}
+	
+	public Optional<Fattura> findById(Long id) {
+		return fatturaRepo.findById(id);	
 	}
 
 	public Page<Fattura> findByData(int day, int month, int year, Pageable pageable) {
@@ -106,6 +111,10 @@ public class FatturaService {
 	
 	public Page<Fattura> findAll(Pageable pageable) {
 		return fatturaRepo.findAll(pageable);
+	}
+	
+	public List<Fattura> findAll() {
+		return fatturaRepo.findAll();
 	}
 
 }

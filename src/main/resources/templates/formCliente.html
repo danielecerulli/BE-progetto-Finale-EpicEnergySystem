@@ -13,14 +13,19 @@
 		Ragione Sociale: <input type="text" th:field="*{ragioneSociale}" />
 	</p>
 	
-	<p>
+	<!--  <p>
    Tipo Cliente: <select th:field="*{tipoCliente}" name="tipoCliente">
 	<option th:each="c : ${tipoCliente}"
     th:value="${c.tipoCliente}"
     th:text="${c.tipoCliente}" />
     </select>
+	</p> -->
+	<p>
+	Tipo Cliente: <select th:field="*{tipoCliente}"  name="enumtipocliente">
+            <option th:each="e : ${T(it.epicode.be.energy.model.TipoCliente).values()}"
+                th:value="${e}" th:text="${e}"></option>
+        </select>
 	</p>
-	
 	<p>
 		Partita iva: <input type="text" th:field="*{iva}" />
 	</p>
@@ -75,9 +80,17 @@
 		Località sede legale: <input type="text" th:field="*{sedeLegale.localita}" />
 	</p>
 	
-	<p>
+	<!-- <p>
 		Comune sede legale: <input type="text" th:field="*{sedeLegale.comune.nome}" />
-	</p><br>
+	</p><br> -->
+	
+	<p>
+	Comune sede legale: <select th:field="*{sedeLegale.comune}" name="sedeLegale">
+	<option th:each="c : ${listaComuni}"
+    th:value="${c.id}"
+    th:text="${c.nome}" />
+    </select>
+	</p><br><br>
 	
 	<p>
 		Via sede operativa: <input type="text" th:field="*{sedeOperativa.via}" />
@@ -95,10 +108,17 @@
 		Località sede operativa: <input type="text" th:field="*{sedeOperativa.localita}" />
 	</p>
 	
-	<p>
+	<!--  <p>
 		Comune sede operativa: <input type="text" th:field="*{sedeOperativa.comune.nome}" />
-	</p>
+	</p> -->
 	
+	<p>
+	Comune sede operativa: <select th:field="*{sedeOperativa.comune}" name="sedeOperativa">
+	<option th:each="c : ${listaComuni}"
+    th:value="${c.id}"
+    th:text="${c.nome}" />
+    </select>
+	</p>
 	
    
   <!--  Indirizzo Sede Legale: <select th:field="*{indirizzoSedeLegale}" name="indirizzo">

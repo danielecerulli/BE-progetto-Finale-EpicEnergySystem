@@ -13,6 +13,8 @@ import javax.persistence.InheritanceType;
 //import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -35,7 +37,9 @@ public class Cliente extends BaseEntity {
 	private String ragioneSociale;
 	private String iva;
 	private String email;
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date dataInserimento;
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date dataUltimoContatto;
 	private BigDecimal fatturatoAnnuale;
 	private String pec;

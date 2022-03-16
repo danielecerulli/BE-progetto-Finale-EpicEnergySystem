@@ -28,4 +28,11 @@ public class Indirizzo extends BaseEntity {
 	@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 	private Comune comune;
 	
+	@Override
+	public String toString() {
+		return via + " " + civico + ", " + localita + ", " + cap + ", "
+				+ comune.getNome() + ", " + comune.getProvincia().getSigla();
+	}
+	
+	
 }

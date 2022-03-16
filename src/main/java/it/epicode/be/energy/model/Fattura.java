@@ -11,6 +11,8 @@ import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.ManyToOne;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
@@ -31,7 +33,8 @@ public class Fattura extends BaseEntity {
 	@ManyToOne
 	@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 	private Cliente cliente;
-	private int anno; 
+	private int anno;
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date data;
 	private BigDecimal importo;
 	private int numeroFattura;
