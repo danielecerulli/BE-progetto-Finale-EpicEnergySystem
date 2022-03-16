@@ -38,11 +38,8 @@ public class FatturaService {
 		return fatturaRepo.findById(id);	
 	}
 
-	public Page<Fattura> findByData(int day, int month, int year, Pageable pageable) {
+	public Page<Fattura> findByData(Date data, Pageable pageable) {
 		try {
-			Calendar cal = Calendar.getInstance();
-			cal.set(year, month, day);
-			Date data = cal.getTime();
 			return fatturaRepo.findAllByData(data, pageable);
 		} catch (Exception e) {
 			throw new RuntimeException(e.getMessage());

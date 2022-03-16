@@ -2,10 +2,12 @@ package it.epicode.be.energy.controller.rest;
 
 
 import java.math.BigDecimal;
+import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -16,6 +18,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import io.swagger.v3.oas.annotations.Operation;
@@ -72,14 +75,12 @@ public class FatturaController {
 
 	}
 	
-	@GetMapping(path = "/fatturadata/{day}/{month}/{year}")
+	@GetMapping(path = "/fatturadata")
 	@PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USER')")
 	@Operation(description = "Ricerca fatture in base alla data")
-	public ResponseEntity<Page<Fattura>> findByData(@PathVariable(required = true) int day,
-													 @PathVariable(required = true) int month, 
-													 @PathVariable(required = true) int year, 
-													 Pageable pageable) {
-		Page<Fattura> findByData = fatturaServ.findByData(day, month, year, pageable);
+	public ResponseEntity<Page<Fattura>> findByData(@RequestParam(value = "time", required = false) 
+    @DateTimeFormat(pattern="yyyy-MM-dd") Date date , Pageable pageable) {
+		Page<Fattura> findByData = fatturaServ.findByData(date, pageable);
 		
 		if (findByData.hasContent()) {
 			return new ResponseEntity<>(findByData, HttpStatus.OK);

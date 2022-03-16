@@ -1,5 +1,6 @@
 package it.epicode.be.energy.service;
 
+import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
@@ -33,11 +34,11 @@ public class ClienteService {
 	
 	@Autowired
 	IndirizzoRepository indirizzoRepo;
-
 	
-	public Page<Cliente> findByParteNome(String nome, Pageable pageable) {
+	
+	public Page<Cliente> findByParteRagioneSociale(String part, Pageable pageable) {
 		try {
-			Page<Cliente> clienti = clienteRepo.findByParteNome(nome, pageable);
+			Page<Cliente> clienti = clienteRepo.findByRagioneSocialeContaining(part, pageable);
 			if (clienti.hasContent()) {
 				return clienti;
 			}
@@ -50,11 +51,9 @@ public class ClienteService {
 	
 	}
 	
-	public Page<Cliente> findByDataInserimento(int d, int m, int y, Pageable pageable) {
+	
+	public Page<Cliente> findByDataInserimento(Date data, Pageable pageable) {
 		try {
-			Calendar cal = Calendar.getInstance();
-			cal.set(y, m, d);
-			Date data = cal.getTime();
 
 			return clienteRepo.findAllByDataInserimento(data, pageable);
 		} catch (Exception e) {
@@ -65,18 +64,19 @@ public class ClienteService {
 	
 	}
 	
-	public Page<Cliente> findByDataUltimoContatto(int d, int m, int y, Pageable pageable) {
-		try {
-			Calendar cal = Calendar.getInstance();
-			cal.set(y, m, d);
-			Date data = cal.getTime();
+	public Page<Cliente> findByDataUltimoContatto(Date data, Pageable pageable) {
+		try {			
+
 			return clienteRepo.findAllByDataUltimoContatto(data, pageable);
 		} catch (Exception e) {
+
 			e.printStackTrace();
 			throw new RuntimeException(e.getMessage());
 		}
 	
 	}
+	
+	
 	
 	public Page<Cliente> findAllSorted(Integer page, Integer size, String sort) {
 		try {
@@ -97,9 +97,9 @@ public class ClienteService {
 	
 	}
 	
-	public Page<Cliente> findAllSortedByFatturatoAnnuale(int anno, Pageable pageable) {
+	public Page<Cliente> findAllSortedByFatturatoAnnuale(BigDecimal fattAnn, Pageable pageable) {
 		try {
-			return clienteRepo.findAllSortedByFatturatoAnnuale(anno, pageable);
+			return clienteRepo.findAllSortedByFatturatoAnnuale(fattAnn, pageable);
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw new RuntimeException(e.getMessage());
