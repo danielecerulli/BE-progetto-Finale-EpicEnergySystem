@@ -10,6 +10,7 @@
 <div class="header-section">Elenco clienti:</div>
  <div th:switch="${!listaClienti.hasContent()}">
    <div class="no-item-found" th:case="true">Nessun cliente trovato!</div>
+   <div class="link-home"><a href="/">Torna alla Home</a></div>
    <!-- * for default case -->
    <div th:case="*">
    <table width="100%">
@@ -48,6 +49,7 @@
             </tr>
        </tbody>
    </table>
+   <div class="link-home"><a href="/">Torna alla Home</a></div>
     <div class="footer">Daniele Cerulli</div>
    </body>
 </html>

@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8"/>
-    <title>Elenco Comuni - Bootstrap Pagination</title>
+    <title>Elenco Province - Bootstrap Pagination</title>
 	<base href="/">
     <link th:rel="stylesheet" th:href="@{webjars/bootstrap/4.0.0-2/css/bootstrap.min.css} "/>
     <!--  <link rel="stylesheet" type="text/css" th:href="@{/css/main.css}" /> -->
@@ -13,7 +13,7 @@
 <!-- Navigation -->
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark static-top">
     <div class="container">
-        <a class="navbar-brand" href="/">Elenco Comuni - Epic Energy System</a>
+        <a class="navbar-brand" href="/">Elenco Province - Epic Energy System</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
                 aria-controls="navbarResponsive"
                 aria-expanded="false" aria-label="Toggle navigation">
@@ -47,8 +47,7 @@
                 <thead>
                 <tr>
                     <th>ID</th>
-                    <th>Nome comune</th>
-                    <th>Provincia</th>
+                    <th>Nome provincia</th>
                     <th>Sigla provincia</th>
                     <th>Regione</th>
                 </tr>
@@ -56,10 +55,9 @@
                 <tbody>
                 <tr th:each="post : ${posts.page}">
                     <td th:text="${post.id}">ID</td>
-                    <td th:text="${post.nome}">Nome comune</td>
-                    <td th:text="${post.provincia.nome}">Provincia</td>
-                    <td th:text="${post.provincia.sigla}">Sigla Provincia</td>
-                    <td th:text="${post.provincia.regione}">Regione</td>
+                    <td th:text="${post.nome}">Nome provincia</td>
+                    <td th:text="${post.sigla}">Sigla provincia</td>
+                    <td th:text="${post.regione}">Regione</td>
                 </tr>
                 </tbody>
             </table>
@@ -67,13 +65,13 @@
             <nav aria-label="Page navigation" class="paging">
                 <ul class="pagination" th:if="${posts.page.totalPages > 1}">
                     <li class="page-item" th:classappend="${!posts.paging.isPrevEnabled()? 'disabled' : ''}">
-                        <a class="page-link" th:href="@{'/comunibootstrap/mostraelenco?pageNumber=' + ${posts.paging.pageNumber - 1}}"
+                        <a class="page-link" th:href="@{'/provincebootstrap/mostraelenco?pageNumber=' + ${posts.paging.pageNumber - 1}}"
                            tabindex="-1">Previous</a>
                     </li>
                     <th:block th:each="item : ${posts.paging.getItems()}">
                         <li class="page-item" th:classappend="${item.index == posts.paging.pageNumber? 'active' : ''}"
                             th:if="${item.pageItemType.name() == 'PAGE'}">
-                            <a class="page-link" th:href="@{'/comunibootstrap/mostraelenco?pageNumber=' + ${item.index}}"
+                            <a class="page-link" th:href="@{'/provincebootstrap/mostraelenco?pageNumber=' + ${item.index}}"
                                th:text="${item.index}"></a>
                         </li>
                         <li class="page-item disabled" th:if="${item.pageItemType.name() == 'DOTS'}">
@@ -81,7 +79,7 @@
                         </li>
                     </th:block>
                     <li class="page-item" th:classappend="${!posts.paging.isNextEnabled()? 'disabled' : ''}">
-                        <a class="page-link" th:href="@{'/comunibootstrap/mostraelenco?pageNumber=' + ${posts.paging.pageNumber + 1}}">Next</a>
+                        <a class="page-link" th:href="@{'/provincebootstrap/mostraelenco?pageNumber=' + ${posts.paging.pageNumber + 1}}">Next</a>
                     </li>
                 </ul>
             </nav>

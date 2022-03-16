@@ -34,7 +34,7 @@ public class IndirizzoControllerWeb {
 	@Operation(description = "Mostra elenco indirizzi su pagina Thymeleaf")
 	public ModelAndView mostraElencoIndirizzi(Pageable pageable) {
 		log.info("Elenco indirizzi su pagina Thymeleaf");
-		ModelAndView view = new ModelAndView("elencocomuni");
+		ModelAndView view = new ModelAndView("elencoindirizzi");
 		view.addObject("listaIndirizzi", indirizzoServ.findAll());
 		return view;
 	}
