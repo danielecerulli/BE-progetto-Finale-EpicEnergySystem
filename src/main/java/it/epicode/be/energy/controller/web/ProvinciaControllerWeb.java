@@ -15,10 +15,10 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @RequestMapping("/province")
 public class ProvinciaControllerWeb {
-	
+
 	@Autowired
 	ProvinciaService provinciaServ;
-	
+
 	@GetMapping("/mostraelenco")
 	@Operation(description = "Mostra elenco province su pagina Thymeleaf")
 	public ModelAndView mostraElencoProvince(Pageable pageable) {

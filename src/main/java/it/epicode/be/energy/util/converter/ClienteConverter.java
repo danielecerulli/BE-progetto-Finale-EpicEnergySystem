@@ -9,10 +9,10 @@ import it.epicode.be.energy.service.ClienteService;
 
 @Component
 public class ClienteConverter implements Converter<Long, Cliente> {
-	
+
 	@Autowired
 	ClienteService clienteServ;
-	
+
 	@Override
 	public Cliente convert(Long id) {
 		return clienteServ.findById(id).get();

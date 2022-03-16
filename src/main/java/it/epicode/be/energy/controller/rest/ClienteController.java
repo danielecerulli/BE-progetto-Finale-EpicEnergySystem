@@ -1,6 +1,5 @@
 package it.epicode.be.energy.controller.rest;
 
-
 import java.math.BigDecimal;
 import java.util.Date;
 
@@ -64,8 +63,8 @@ public class ClienteController {
 	@GetMapping(path = "/clientesortedfatturatoannuale/{fattAnn}")
 	@PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USER')")
 	@Operation(description = "Ricerca clienti in base all'anno ed ordinamento in base al fatturato annuale")
-	public ResponseEntity<Page<Cliente>> findAllSortedByFatturatoAnnuale(@PathVariable(required = true) BigDecimal fattAnn,
-			Pageable pageable) {
+	public ResponseEntity<Page<Cliente>> findAllSortedByFatturatoAnnuale(
+			@PathVariable(required = true) BigDecimal fattAnn, Pageable pageable) {
 		Page<Cliente> find = clienteServ.findAllSortedByFatturatoAnnuale(fattAnn, pageable);
 
 		if (find.hasContent()) {
@@ -76,13 +75,11 @@ public class ClienteController {
 
 	}
 
-	@GetMapping(path = "/clientesortedall")
+	@GetMapping(path = "/clienti")
 	@PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USER')")
 	@Operation(description = "Ricerca di tutti i clienti con paginazione")
-	public ResponseEntity<Page<Cliente>> findAllSorted(@RequestParam(defaultValue = "2") int page,
-			@RequestParam(defaultValue = "10") int size, @RequestParam(defaultValue = "id") String sort,
-			Pageable pageable) {
-		Page<Cliente> find = clienteServ.findAllSorted(page, size, sort);
+	public ResponseEntity<Page<Cliente>> findAll(Pageable pageable) {
+		Page<Cliente> find = clienteServ.findAll(pageable);
 
 		if (find.hasContent()) {
 			return new ResponseEntity<>(find, HttpStatus.OK);
@@ -95,8 +92,9 @@ public class ClienteController {
 	@GetMapping(path = "/clientedataultimocontatto")
 	@PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USER')")
 	@Operation(description = "Ricerca clienti in base alla data ultimo contatto")
-	public ResponseEntity<Page<Cliente>> findAllByDataUltimoContatto(@RequestParam(value = "time", required = false) 
-    @DateTimeFormat(pattern="yyyy-MM-dd") Date date , Pageable pageable) {
+	public ResponseEntity<Page<Cliente>> findAllByDataUltimoContatto(
+			@RequestParam(value = "time", required = false) @DateTimeFormat(pattern = "yyyy-MM-dd") Date date,
+			Pageable pageable) {
 
 		Page<Cliente> find = clienteServ.findByDataUltimoContatto(date, pageable);
 
@@ -107,13 +105,13 @@ public class ClienteController {
 		}
 
 	}
-	
-	
+
 	@GetMapping(path = "/clientedatainserimento")
 	@PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USER')")
 	@Operation(description = "Ricerca clienti in base alla data di inserimento")
-	public ResponseEntity<Page<Cliente>> findAllByDataInserimento(@RequestParam(value = "time", required = false) 
-    @DateTimeFormat(pattern="yyyy-MM-dd") Date date , Pageable pageable) {
+	public ResponseEntity<Page<Cliente>> findAllByDataInserimento(
+			@RequestParam(value = "time", required = false) @DateTimeFormat(pattern = "yyyy-MM-dd") Date date,
+			Pageable pageable) {
 
 		Page<Cliente> find = clienteServ.findByDataInserimento(date, pageable);
 
@@ -124,8 +122,7 @@ public class ClienteController {
 		}
 
 	}
-	
-	
+
 	@GetMapping(path = "/clienteparteragionesociale/{ragSoc}")
 	@PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USER')")
 	@Operation(description = "Ricerca clienti in base alla ragione sociale (anche parziale)")
@@ -140,7 +137,7 @@ public class ClienteController {
 		}
 
 	}
-	
+
 	@GetMapping(path = "/clienteprovincia/{siglaProvincia}")
 	@PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USER')")
 	@Operation(description = "Ricerca clienti in base alla sigla della provincia")
@@ -155,7 +152,7 @@ public class ClienteController {
 		}
 
 	}
-	
+
 	@GetMapping(path = "/allclienteorderbynomecontatto")
 	@PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USER')")
 	@Operation(description = "Ricerca di tutti i clienti con ordinamento alfabetico")
@@ -169,7 +166,7 @@ public class ClienteController {
 		}
 
 	}
-	
+
 	@GetMapping(path = "/allclienteorderbyfatturatoannuale")
 	@PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USER')")
 	@Operation(description = "Ricerca di tutti i clienti con ordinamento in base al fatturato annuale (discendente)")

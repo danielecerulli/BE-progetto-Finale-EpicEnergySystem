@@ -29,19 +29,19 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @RequestMapping("/clienti")
 public class ClientiControllerWeb {
-	
+
 	@Autowired
 	ClienteService clienteServ;
-	
+
 	@Autowired
 	IndirizzoService indirizzoServ;
-	
+
 	@Autowired
 	ComuneService comuneServ;
-	
+
 	@Autowired
 	FatturaService fatturaServ;
-	
+
 	@GetMapping("/mostraelenco")
 	@Operation(description = "Mostra elenco clienti su pagina Thymeleaf")
 	public ModelAndView mostraElencoClienti(Pageable pageable) {
@@ -50,28 +50,28 @@ public class ClientiControllerWeb {
 		view.addObject("listaClienti", clienteServ.findAll(pageable));
 		return view;
 	}
-	
+
 	@GetMapping("/mostraformaggiungi")
 	public String mostraFormAggiungi(Cliente cliente, Indirizzo sedLeg, Indirizzo sedOpe, Model model) {
 		log.info("form aggiunta cliente");
 		model.addAttribute("listaComuni", comuneServ.findAll());
 		return "formCliente";
 	}
-	
+
 	@PostMapping("/addCliente")
-	public String aggiungiCliente(@Valid Cliente cliente, Indirizzo indirizzoSedLeg, Indirizzo indirizzoSedOpe, BindingResult result, Model model) {
+	public String aggiungiCliente(@Valid Cliente cliente, Indirizzo indirizzoSedLeg, Indirizzo indirizzoSedOpe,
+			BindingResult result, Model model) {
 		log.info("Action aggiunta cliente");
 		if (result.hasErrors()) {
 			model.addAttribute("listaComuni", comuneServ.findAll());
 			return "formCliente";
 		}
-		
+
 		clienteServ.save(cliente);
-		
+
 		return "redirect:/clienti/mostraelenco";
 	}
-	
-	
+
 	@GetMapping("/eliminacliente/{id}")
 	public ModelAndView eliminaCliente(@PathVariable Long id, Model model) {
 		Optional<Cliente> clienteTempElim = clienteServ.findById(id);
@@ -81,18 +81,18 @@ public class ClientiControllerWeb {
 			view.addObject("listaClienti", clienteServ.findAll());
 			return view;
 		} else {
-			return new ModelAndView("error").addObject("message","Cliente con id " + id + " non trovato!");
+			return new ModelAndView("error").addObject("message", "Cliente con id " + id + " non trovato!");
 		}
-		
+
 	}
-	
+
 	@GetMapping("/mostraformfattura")
 	public String mostraFormAggiungiFattura(Cliente cliente, Fattura fattura, Model model) {
 		log.info("form aggiunta fattura");
 		model.addAttribute("listaClienti", clienteServ.findAll());
 		return "formFattura";
 	}
-	
+
 	@PostMapping("/addFattura")
 	public String aggiungiFattura(@Valid Fattura fattura, Cliente cliente, BindingResult result, Model model) {
 		log.info("Action aggiunta fattura");
@@ -100,12 +100,12 @@ public class ClientiControllerWeb {
 			model.addAttribute("listaClienti", clienteServ.findAll());
 			return "formFattura";
 		}
-		
+
 		fatturaServ.save(fattura);
-		
+
 		return "redirect:/clienti/mostraelencofatture";
 	}
-	
+
 	@GetMapping("/mostraelencofatture")
 	@Operation(description = "Mostra elenco fatture su pagina Thymeleaf")
 	public ModelAndView mostraElencoFatture(Pageable pageable) {
@@ -114,7 +114,7 @@ public class ClientiControllerWeb {
 		view.addObject("listaFatture", fatturaServ.findAll(pageable));
 		return view;
 	}
-	
+
 	@GetMapping("/eliminafattura/{id}")
 	public ModelAndView eliminaFattura(@PathVariable Long id, Model model) {
 		Optional<Fattura> fatturaTempElim = fatturaServ.findById(id);
@@ -124,11 +124,11 @@ public class ClientiControllerWeb {
 			view.addObject("listaFatture", fatturaServ.findAll());
 			return view;
 		} else {
-			return new ModelAndView("error").addObject("message","Fattura con id " + id + " non trovata!");
+			return new ModelAndView("error").addObject("message", "Fattura con id " + id + " non trovata!");
 		}
-		
+
 	}
-	
+
 	@GetMapping("/eliminaindirizzo/{id}")
 	public ModelAndView eliminaIndirizzo(@PathVariable Long id, Model model) {
 		Optional<Indirizzo> indirizzoTempElim = indirizzoServ.findById(id);
@@ -138,9 +138,9 @@ public class ClientiControllerWeb {
 			view.addObject("listaIndirizzi", indirizzoServ.findAll());
 			return view;
 		} else {
-			return new ModelAndView("error").addObject("message","Indirizzo con id " + id + " non trovato!");
+			return new ModelAndView("error").addObject("message", "Indirizzo con id " + id + " non trovato!");
 		}
-		
+
 	}
-	
+
 }

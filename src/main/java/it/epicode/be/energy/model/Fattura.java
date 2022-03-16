@@ -5,10 +5,6 @@ import java.util.Calendar;
 import java.util.Date;
 
 import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.Inheritance;
-import javax.persistence.InheritanceType;
 import javax.persistence.ManyToOne;
 
 import org.springframework.format.annotation.DateTimeFormat;
@@ -21,7 +17,6 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
-
 
 @Data
 @EqualsAndHashCode(callSuper = true)
@@ -39,16 +34,16 @@ public class Fattura extends BaseEntity {
 	private BigDecimal importo;
 	private int numeroFattura;
 	private String stato;
-	
+
 	public void setData() {
-		this.data=new Date();
+		this.data = new Date();
 	}
+
 	public void setAnno() {
-		Calendar cal= Calendar.getInstance();
+		Calendar cal = Calendar.getInstance();
 		cal.setTime(this.data);
-		var year= cal.get(Calendar.YEAR);
-		this.anno=year;
+		var year = cal.get(Calendar.YEAR);
+		this.anno = year;
 	}
-	
-	
+
 }

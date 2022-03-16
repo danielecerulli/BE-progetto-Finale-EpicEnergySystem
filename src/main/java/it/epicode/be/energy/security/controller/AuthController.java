@@ -30,11 +30,10 @@ import it.epicode.be.energy.security.repository.UserRepository;
 import it.epicode.be.energy.security.service.UserDetailsImpl;
 import it.epicode.be.energy.security.util.JwtUtils;
 
-
 @RestController
 @RequestMapping("/auth")
 public class AuthController {
-	
+
 	@Autowired
 	PasswordEncoder encoder;
 
@@ -43,7 +42,7 @@ public class AuthController {
 
 	@Autowired
 	UserRepository userRepository;
-	
+
 	@Autowired
 	RoleRepository roleRepository;
 
@@ -68,7 +67,7 @@ public class AuthController {
 
 		return ResponseEntity.ok(loginResponse);
 	}
-	
+
 	@PostMapping("/signup")
 	public ResponseEntity<?> registerUser(@RequestBody RequestRegisterUser registerUser) throws Exception {
 

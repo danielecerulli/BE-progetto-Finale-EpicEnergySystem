@@ -28,7 +28,7 @@ public class ComuneService {
 	public Page<Comune> findAll(Pageable pageable) {
 		return comuneRepo.findAll(pageable);
 	}
-	
+
 	public List<Comune> findAll() {
 		return comuneRepo.findAll();
 	}

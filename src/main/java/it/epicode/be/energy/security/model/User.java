@@ -16,7 +16,7 @@ import lombok.Data;
 
 @Data
 @Entity
-@Table (name = "user_spring") //user_spring se usi postgresql, perché user va in conflitto
+@Table(name = "user_spring")
 public class User {
 
 	@Id

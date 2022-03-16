@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RestController;
 import it.epicode.be.energy.security.model.User;
 import it.epicode.be.energy.security.service.UserService;
 
-
 @RestController
 @RequestMapping("/api")
 public class UserController {

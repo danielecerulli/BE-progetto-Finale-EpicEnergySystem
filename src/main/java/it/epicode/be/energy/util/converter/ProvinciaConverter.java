@@ -9,15 +9,13 @@ import it.epicode.be.energy.service.ProvinciaService;
 
 @Component
 public class ProvinciaConverter implements Converter<Long, Provincia> {
-	
+
 	@Autowired
 	ProvinciaService provinciaServ;
 
 	@Override
-	public Provincia convert(Long id) {		
+	public Provincia convert(Long id) {
 		return provinciaServ.findById(id).get();
 	}
-
-	
 
 }

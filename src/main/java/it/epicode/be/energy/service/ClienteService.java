@@ -1,17 +1,13 @@
 package it.epicode.be.energy.service;
 
 import java.math.BigDecimal;
-import java.util.Arrays;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import it.epicode.be.energy.exceptions.EnergyException;
@@ -25,17 +21,16 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @Service
 public class ClienteService {
-	
+
 	@Autowired
 	ClienteRepository clienteRepo;
-	
+
 	@Autowired
 	FatturaRepository fatturaRepo;
-	
+
 	@Autowired
 	IndirizzoRepository indirizzoRepo;
-	
-	
+
 	public Page<Cliente> findByParteRagioneSociale(String part, Pageable pageable) {
 		try {
 			Page<Cliente> clienti = clienteRepo.findByRagioneSocialeContaining(part, pageable);
@@ -48,10 +43,9 @@ public class ClienteService {
 			e.printStackTrace();
 			throw new RuntimeException(e.getMessage());
 		}
-	
+
 	}
-	
-	
+
 	public Page<Cliente> findByDataInserimento(Date data, Pageable pageable) {
 		try {
 
@@ -61,11 +55,11 @@ public class ClienteService {
 			e.printStackTrace();
 			throw new RuntimeException(e.getMessage());
 		}
-	
+
 	}
-	
+
 	public Page<Cliente> findByDataUltimoContatto(Date data, Pageable pageable) {
-		try {			
+		try {
 
 			return clienteRepo.findAllByDataUltimoContatto(data, pageable);
 		} catch (Exception e) {
@@ -73,30 +67,9 @@ public class ClienteService {
 			e.printStackTrace();
 			throw new RuntimeException(e.getMessage());
 		}
-	
+
 	}
-	
-	
-	
-	public Page<Cliente> findAllSorted(Integer page, Integer size, String sort) {
-		try {
-			String[] attributi = { "id", "ragioneSociale", "dataInserimento", "dataUltimoContatto" };
-			if (Arrays.stream(attributi).anyMatch(sort::equals)) {
-				Pageable pageable = PageRequest.of(page, size, Sort.by(sort));
-				Page<Cliente> pageResult = clienteRepo.findAll(pageable);
-				if (pageResult.hasContent()) {
-					return pageResult;
-				} else
-					return null;
-			}
-			log.error("Nessuna corrispondenza trovata");
-			return null;
-		} catch (Exception e) {
-			throw new RuntimeException();
-		}
-	
-	}
-	
+
 	public Page<Cliente> findAllSortedByFatturatoAnnuale(BigDecimal fattAnn, Pageable pageable) {
 		try {
 			return clienteRepo.findAllSortedByFatturatoAnnuale(fattAnn, pageable);
@@ -104,9 +77,9 @@ public class ClienteService {
 			e.printStackTrace();
 			throw new RuntimeException(e.getMessage());
 		}
-	
+
 	}
-	
+
 	public Page<Fattura> findFatturaByIdCliente(Long id, Pageable pageable) {
 		try {
 			return fatturaRepo.findFatturaByIdCliente(id, pageable);
@@ -115,13 +88,13 @@ public class ClienteService {
 			e.printStackTrace();
 			throw new RuntimeException(e.getMessage());
 		}
-	
+
 	}
-	
+
 	public Cliente save(Cliente cliente) {
 		return clienteRepo.save(cliente);
 	}
-	
+
 	public void delete(Long id) {
 		if (clienteRepo.findById(id).isPresent()) {
 			Cliente delete = clienteRepo.findById(id).get();
@@ -131,9 +104,9 @@ public class ClienteService {
 		} else {
 			throw new EnergyException("Cliente non cancellato/trovato!");
 		}
-		
+
 	}
-	
+
 	public Cliente update(Long id, Cliente cliente) {
 		Optional<Cliente> clienteResult = clienteRepo.findById(id);
 		if (clienteResult.isPresent()) {
@@ -157,7 +130,7 @@ public class ClienteService {
 		}
 		return null; // TODO implementare eccezione relativa.
 	}
-	
+
 	public Page<Cliente> findAllByProvinciaSigla(String siglaProvincia, Pageable pageable) {
 		try {
 			Page<Cliente> clientiProv = clienteRepo.findAllBySedeLegaleComuneProvinciaSigla(siglaProvincia, pageable);
@@ -170,9 +143,9 @@ public class ClienteService {
 			e.printStackTrace();
 			throw new RuntimeException(e.getMessage());
 		}
-	
+
 	}
-	
+
 	public Page<Cliente> findByOrderByNomeContattoAsc(Pageable pageable) {
 		try {
 			Page<Cliente> clientiNomeAsc = clienteRepo.findByOrderByNomeContattoAsc(pageable);
@@ -185,9 +158,9 @@ public class ClienteService {
 			e.printStackTrace();
 			throw new RuntimeException(e.getMessage());
 		}
-	
+
 	}
-	
+
 	public Page<Cliente> findByOrderByFatturatoAnnualeDesc(Pageable pageable) {
 		try {
 			Page<Cliente> clienti = clienteRepo.findByOrderByFatturatoAnnualeDesc(pageable);
@@ -200,19 +173,19 @@ public class ClienteService {
 			e.printStackTrace();
 			throw new RuntimeException(e.getMessage());
 		}
-	
+
 	}
-	
+
 	public Page<Cliente> findAll(Pageable pageable) {
 		return clienteRepo.findAll(pageable);
 	}
-	
+
 	public Optional<Cliente> findById(Long id) {
 		return clienteRepo.findById(id);
 	}
-	
+
 	public List<Cliente> findAll() {
 		return clienteRepo.findAll();
 	}
-	
+
 }

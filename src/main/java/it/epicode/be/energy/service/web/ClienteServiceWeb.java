@@ -13,18 +13,18 @@ import it.epicode.be.energy.repository.ClienteRepository;
 
 @Service
 public class ClienteServiceWeb {
-	
+
 	private final ClienteRepository clienteRepo;
 
-    @Autowired
-    public ClienteServiceWeb(ClienteRepository clienteRepo) {
-        this.clienteRepo = clienteRepo;
-    }
-	
+	@Autowired
+	public ClienteServiceWeb(ClienteRepository clienteRepo) {
+		this.clienteRepo = clienteRepo;
+	}
+
 	public Paged<Cliente> getPage(int pageNumber, int size) {
-        PageRequest request = PageRequest.of(pageNumber - 1, size, Sort.by(Sort.Direction.ASC, "id"));
-        Page<Cliente> postPage = clienteRepo.findAll(request);
-        return new Paged<>(postPage, Paging.of(postPage.getTotalPages(), pageNumber, size));
-    }
+		PageRequest request = PageRequest.of(pageNumber - 1, size, Sort.by(Sort.Direction.ASC, "id"));
+		Page<Cliente> postPage = clienteRepo.findAll(request);
+		return new Paged<>(postPage, Paging.of(postPage.getTotalPages(), pageNumber, size));
+	}
 
 }

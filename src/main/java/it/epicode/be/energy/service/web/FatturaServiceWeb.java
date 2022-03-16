@@ -16,14 +16,14 @@ public class FatturaServiceWeb {
 
 	private final FatturaRepository fatturaRepo;
 
-    @Autowired
-    public FatturaServiceWeb(FatturaRepository fatturaRepo) {
-        this.fatturaRepo = fatturaRepo;
-    }
-	
+	@Autowired
+	public FatturaServiceWeb(FatturaRepository fatturaRepo) {
+		this.fatturaRepo = fatturaRepo;
+	}
+
 	public Paged<Fattura> getPage(int pageNumber, int size) {
-        PageRequest request = PageRequest.of(pageNumber - 1, size, Sort.by(Sort.Direction.ASC, "id"));
-        Page<Fattura> postPage = fatturaRepo.findAll(request);
-        return new Paged<>(postPage, Paging.of(postPage.getTotalPages(), pageNumber, size));
-    }
+		PageRequest request = PageRequest.of(pageNumber - 1, size, Sort.by(Sort.Direction.ASC, "id"));
+		Page<Fattura> postPage = fatturaRepo.findAll(request);
+		return new Paged<>(postPage, Paging.of(postPage.getTotalPages(), pageNumber, size));
+	}
 }

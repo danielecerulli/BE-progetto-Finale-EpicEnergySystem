@@ -9,10 +9,10 @@ import it.epicode.be.energy.service.ComuneService;
 
 @Component
 public class ComuneConverter implements Converter<Long, Comune> {
-	
+
 	@Autowired
 	ComuneService comuneServ;
-	
+
 	@Override
 	public Comune convert(Long id) {
 		return comuneServ.findById(id).get();

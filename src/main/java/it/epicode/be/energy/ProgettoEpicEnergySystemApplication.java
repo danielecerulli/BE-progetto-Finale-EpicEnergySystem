@@ -8,7 +8,7 @@ public class ProgettoEpicEnergySystemApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(ProgettoEpicEnergySystemApplication.class, args);
-	    //System.setProperty("spring.devtools.restart.enabled", "false");
+		// System.setProperty("spring.devtools.restart.enabled", "false");
 	}
 
 }

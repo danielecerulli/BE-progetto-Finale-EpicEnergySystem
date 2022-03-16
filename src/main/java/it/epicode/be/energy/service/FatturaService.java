@@ -1,7 +1,6 @@
 package it.epicode.be.energy.service;
 
 import java.math.BigDecimal;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -33,9 +32,9 @@ public class FatturaService {
 		}
 
 	}
-	
+
 	public Optional<Fattura> findById(Long id) {
-		return fatturaRepo.findById(id);	
+		return fatturaRepo.findById(id);
 	}
 
 	public Page<Fattura> findByData(Date data, Pageable pageable) {
@@ -62,16 +61,16 @@ public class FatturaService {
 		} catch (Exception e) {
 			throw new RuntimeException(e.getMessage());
 		}
-	
+
 	}
-	
+
 	public Page<Fattura> findByRange(BigDecimal min, BigDecimal max, Pageable pageable) {
 		try {
 			return fatturaRepo.findByRange(min, max, pageable);
 		} catch (Exception e) {
 			throw new RuntimeException(e.getMessage());
 		}
-	
+
 	}
 
 	public Fattura save(Fattura fattura) {
@@ -86,9 +85,9 @@ public class FatturaService {
 		} else {
 			throw new EnergyException("Fattura non trovata/cancellata!");
 		}
-		
+
 	}
-	
+
 	public Fattura update(Long id, Fattura fattura) {
 		Optional<Fattura> fatturaResult = fatturaRepo.findById(id);
 		if (fatturaResult.isPresent()) {
@@ -100,16 +99,15 @@ public class FatturaService {
 			update.setStato(fattura.getStato());
 			update.setCliente(fattura.getCliente());
 			return fatturaRepo.save(update);
-		}
-		else 
+		} else
 			throw new EnergyException("Fattura non aggiornata");
-		//return null; // TODO implementare eccezione relativa.
+		// return null; // TODO implementare eccezione relativa.
 	}
-	
+
 	public Page<Fattura> findAll(Pageable pageable) {
 		return fatturaRepo.findAll(pageable);
 	}
-	
+
 	public List<Fattura> findAll() {
 		return fatturaRepo.findAll();
 	}

@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import io.swagger.v3.oas.annotations.Operation;
-import it.epicode.be.energy.model.Comune;
 import it.epicode.be.energy.model.Indirizzo;
 import it.epicode.be.energy.service.ComuneService;
 import it.epicode.be.energy.service.IndirizzoService;
@@ -23,13 +22,13 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @RequestMapping("/indirizzi")
 public class IndirizzoControllerWeb {
-	
+
 	@Autowired
 	IndirizzoService indirizzoServ;
-	
+
 	@Autowired
 	ComuneService comuneServ;
-	
+
 	@GetMapping("/mostraelenco")
 	@Operation(description = "Mostra elenco indirizzi su pagina Thymeleaf")
 	public ModelAndView mostraElencoIndirizzi(Pageable pageable) {
@@ -38,14 +37,14 @@ public class IndirizzoControllerWeb {
 		view.addObject("listaIndirizzi", indirizzoServ.findAll());
 		return view;
 	}
-	
+
 	@GetMapping("/mostraformaggiungi")
 	public String mostraFormAggiungi(Indirizzo indirizzo, Model model) {
 		log.info("form aggiunta indirizzo");
 		model.addAttribute("listaComuni", comuneServ.findAll());
 		return "formIndirizzo";
 	}
-	
+
 	@PostMapping("/addIndirizzo")
 	public String aggiungiIndirizzo(@Valid Indirizzo indirizzo, BindingResult result, Model model) {
 		log.info("Action aggiunta indirizzo");

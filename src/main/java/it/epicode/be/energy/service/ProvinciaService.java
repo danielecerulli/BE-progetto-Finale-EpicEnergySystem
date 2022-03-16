@@ -25,7 +25,7 @@ public class ProvinciaService {
 	public Optional<Provincia> findBySigla(String sigla) {
 		return provinciaRepo.findBySigla(sigla);
 	}
-	
+
 	public Optional<Provincia> findByNome(String nome) {
 		return provinciaRepo.findByNome(nome);
 	}
@@ -33,7 +33,7 @@ public class ProvinciaService {
 	public Page<Provincia> findAll(Pageable pageable) {
 		return provinciaRepo.findAll(pageable);
 	}
-	
+
 	public List<Provincia> findAll() {
 		return provinciaRepo.findAll();
 	}
@@ -44,7 +44,7 @@ public class ProvinciaService {
 
 	public void delete(Long id) {
 		if (provinciaRepo.findById(id).isPresent()) {
-			
+
 			provinciaRepo.delete(provinciaRepo.findById(id).get());
 		}
 
@@ -61,6 +61,6 @@ public class ProvinciaService {
 		} else {
 			throw new EnergyException("Provincia non aggiornata/trovata");
 		}
-	
+
 	}
 }

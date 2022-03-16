@@ -19,24 +19,23 @@ import org.springframework.web.bind.annotation.RestController;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
-import it.epicode.be.energy.model.Comune;
 import it.epicode.be.energy.model.Indirizzo;
 import it.epicode.be.energy.service.IndirizzoService;
 
 @RestController
-@RequestMapping(path ="/api")
+@RequestMapping(path = "/api")
 @SecurityRequirement(name = "bearerAuth")
 public class IndirizzoController {
-	
+
 	@Autowired
 	IndirizzoService indirizzoServ;
-	
+
 	@GetMapping(path = "/indirizzo")
 	@PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USER')")
 	@Operation(description = "Ricerca di TUTTI gli indirizzi nel db")
 	public ResponseEntity<Page<Indirizzo>> findAll(Pageable pageable) {
 		Page<Indirizzo> findAll = indirizzoServ.findAll(pageable);
-		
+
 		if (findAll.hasContent()) {
 			return new ResponseEntity<>(findAll, HttpStatus.OK);
 		} else {
@@ -44,21 +43,21 @@ public class IndirizzoController {
 		}
 
 	}
-	
+
 	@GetMapping(path = "/indirizzo/{id}")
 	@PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USER')")
 	@Operation(description = "Ricerca degli indirizzi per id")
 	public ResponseEntity<Indirizzo> findById(@PathVariable(required = true) Long id) {
 		Optional<Indirizzo> find = indirizzoServ.findById(id);
 
-		if (find.isPresent()) { 
+		if (find.isPresent()) {
 			return new ResponseEntity<>(find.get(), HttpStatus.OK);
 		} else {
 			return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
 		}
 
 	}
-	
+
 	@DeleteMapping(path = "/indirizzo/{id}")
 	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@Operation(description = "Cancellazione degli indirizzi per id")
@@ -67,7 +66,7 @@ public class IndirizzoController {
 		return new ResponseEntity<>("Indirizzo cancellato!", HttpStatus.OK);
 
 	}
-	
+
 	@PostMapping(path = "/indirizzo")
 	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@Operation(description = "Inserimento nuovo indirizzo nel Db")
@@ -76,7 +75,7 @@ public class IndirizzoController {
 		return new ResponseEntity<>(save, HttpStatus.OK);
 
 	}
-	
+
 	@PutMapping(path = "/indirizzo/{id}")
 	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@Operation(description = "Modifica indirizzo per id")

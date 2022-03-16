@@ -12,11 +12,11 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 public class PageItem {
-	
+
 	private PageItemType pageItemType;
 
-    private int index;
+	private int index;
 
-    private boolean active;
+	private boolean active;
 
 }

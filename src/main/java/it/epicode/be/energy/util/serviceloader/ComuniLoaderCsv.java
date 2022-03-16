@@ -1,14 +1,9 @@
 package it.epicode.be.energy.util.serviceloader;
 
-import java.io.FileNotFoundException;
-//import java.io.FileInputStream;
 import java.io.FileReader;
 import java.io.IOException;
-//import java.util.Optional;
 import java.util.ArrayList;
 import java.util.List;
-
-//import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,8 +13,10 @@ import it.epicode.be.energy.model.Provincia;
 import it.epicode.be.energy.service.ComuneService;
 import it.epicode.be.energy.service.ProvinciaService;
 import lombok.extern.slf4j.Slf4j;
+
 /**
  * Classe che permette di leggere e salvare le entries provenienti da file .csv
+ * 
  * @author danie
  *
  */
@@ -32,15 +29,16 @@ public class ComuniLoaderCsv {
 
 	@Autowired
 	ProvinciaService provinciaService;
-	
+
 	/**
 	 * Vecchio metodo che utilizzavo per salvare i comuni e le province da singolo
-	 * file ISTAT ma che inseriva tanti record di provincia quanti sono i comuni sul file csv.
-	 * Metodo "popola()" @Deprecated
+	 * file ISTAT ma che inseriva tanti record di provincia quanti sono i comuni sul
+	 * file csv. Metodo "popola()" @Deprecated
+	 * 
 	 * @return
 	 * @throws IOException
 	 */
-	
+
 	@Deprecated
 	public String popola() throws IOException {
 		try (CSVReader csvReader = new CSVReader(new FileReader("Elenco-comuni-italiani-virgole.csv"));) {
@@ -68,16 +66,18 @@ public class ComuniLoaderCsv {
 	}
 
 	/**
-	 * Metodo  che carica la lista delle province italiane da csv e le aggiunge ad una List<Provincia> province
+	 * Metodo che carica la lista delle province italiane da csv e le aggiunge ad
+	 * una List<Provincia> province
+	 * 
 	 * @return List<Provincia> province
 	 * @throws IOException
 	 */
-	
+
 	public List<Provincia> popolaProvinceList() throws IOException {
 		List<Provincia> province = new ArrayList<>();
 		try (CSVReader csvReader = new CSVReader(new FileReader("province-italiane-virgole.csv"));) {
 			String[] values = null;
-			csvReader.readNext(); // primo readNext per saltare la riga (intestazione)
+			csvReader.readNext();
 			while ((values = csvReader.readNext()) != null) {
 
 				String regione = values[2];
@@ -88,7 +88,6 @@ public class ComuniLoaderCsv {
 				p.setRegione(regione);
 				p.setNome(nome);
 				p.setSigla(sigla);
-				// provinciaRepo.save(p);
 				province.add(p);
 
 			}
@@ -99,8 +98,10 @@ public class ComuniLoaderCsv {
 	}
 
 	/**
-	 * Metodo che salva le province su Db e contestualmente controlla se al comune da salvare sul Db
-	 * corrisponde la provincia e la setta al comune da salvare su Db (Per evitare inserimenti multipli delle province)
+	 * Metodo che salva le province su Db e contestualmente controlla se al comune
+	 * da salvare sul Db corrisponde la provincia e la setta al comune da salvare su
+	 * Db (Per evitare inserimenti multipli delle province)
+	 * 
 	 * @return "DB popolato correttamente con i comuni e le province!";
 	 * @throws IOException
 	 */
@@ -113,12 +114,12 @@ public class ComuniLoaderCsv {
 		log.info("Province salvate correttamente sul DB!");
 		try (CSVReader csvReader = new CSVReader(new FileReader("comuni-italiani-virgole.csv"));) {
 			String[] values = null;
-			csvReader.readNext(); // primo readNext per saltare la riga (intestazione)
+			csvReader.readNext();
 			while ((values = csvReader.readNext()) != null) {
 				Comune c = new Comune();
 				String nomeComune = values[2];
 				String provinciaDelComune = values[3];
-				
+
 				for (Provincia p : province) {
 
 					if (p.getNome().equals(provinciaDelComune) && !provinciaDelComune.isBlank()) {
@@ -126,9 +127,9 @@ public class ComuniLoaderCsv {
 						c.setNome(nomeComune);
 						comuneService.save(c);
 					}
-					
+
 				}
-				
+
 			}
 
 		}

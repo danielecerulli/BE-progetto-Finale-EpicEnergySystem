@@ -20,28 +20,35 @@ import it.epicode.be.energy.security.util.AuthTokenFilter;
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 @Order
 public class FormLoginConfigurationAdapter extends WebSecurityConfigurerAdapter {
-	
+
 	@Autowired
-    UserDetailsServiceImpl userDetailsService;
-    @Bean
-    public BCryptPasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder(4);
-    }
-    @Override
-    public void configure(AuthenticationManagerBuilder authenticationManagerBuilder) throws Exception {
-        authenticationManagerBuilder.userDetailsService(userDetailsService).passwordEncoder(this.passwordEncoder());
-    }
-    @Bean
-    public AuthTokenFilter authenticationJwtTokenFilter() {
-        return new AuthTokenFilter();
-    }
-    @Bean
-    public AuthenticationManager authenticationManager() throws Exception {
-        return super.authenticationManager();
-    }
-    @Override
-    protected void configure(HttpSecurity http) throws Exception {
-        http.authorizeRequests(authz -> authz.antMatchers("/*", "/css/layout.css").permitAll().anyRequest().authenticated()).formLogin();
-    }
+	UserDetailsServiceImpl userDetailsService;
+
+	@Bean
+	public BCryptPasswordEncoder passwordEncoder() {
+		return new BCryptPasswordEncoder(4);
+	}
+
+	@Override
+	public void configure(AuthenticationManagerBuilder authenticationManagerBuilder) throws Exception {
+		authenticationManagerBuilder.userDetailsService(userDetailsService).passwordEncoder(this.passwordEncoder());
+	}
+
+	@Bean
+	public AuthTokenFilter authenticationJwtTokenFilter() {
+		return new AuthTokenFilter();
+	}
+
+	@Bean
+	public AuthenticationManager authenticationManager() throws Exception {
+		return super.authenticationManager();
+	}
+
+	@Override
+	protected void configure(HttpSecurity http) throws Exception {
+		http.authorizeRequests(
+				authz -> authz.antMatchers("/*", "/css/layout.css").permitAll().anyRequest().authenticated())
+				.formLogin();
+	}
 
 }

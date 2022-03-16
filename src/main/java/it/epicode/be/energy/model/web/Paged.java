@@ -13,5 +13,5 @@ public class Paged<T> {
 
 	private Page<T> page;
 
-    private Paging paging;
+	private Paging paging;
 }

@@ -13,18 +13,18 @@ import it.epicode.be.energy.repository.ComuneRepository;
 
 @Service
 public class ComuneServiceWeb {
-	
+
 	private final ComuneRepository comuneRepo;
 
-    @Autowired
-    public ComuneServiceWeb(ComuneRepository comuneRepo) {
-        this.comuneRepo = comuneRepo;
-    }
-	
+	@Autowired
+	public ComuneServiceWeb(ComuneRepository comuneRepo) {
+		this.comuneRepo = comuneRepo;
+	}
+
 	public Paged<Comune> getPage(int pageNumber, int size) {
-        PageRequest request = PageRequest.of(pageNumber - 1, size, Sort.by(Sort.Direction.ASC, "id"));
-        Page<Comune> postPage = comuneRepo.findAll(request);
-        return new Paged<>(postPage, Paging.of(postPage.getTotalPages(), pageNumber, size));
-    }
+		PageRequest request = PageRequest.of(pageNumber - 1, size, Sort.by(Sort.Direction.ASC, "id"));
+		Page<Comune> postPage = comuneRepo.findAll(request);
+		return new Paged<>(postPage, Paging.of(postPage.getTotalPages(), pageNumber, size));
+	}
 
 }

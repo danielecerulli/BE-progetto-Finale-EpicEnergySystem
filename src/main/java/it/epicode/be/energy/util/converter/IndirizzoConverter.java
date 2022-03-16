@@ -9,12 +9,12 @@ import it.epicode.be.energy.service.IndirizzoService;
 
 @Component
 public class IndirizzoConverter implements Converter<Long, Indirizzo> {
-	
+
 	@Autowired
 	IndirizzoService indirizzoServ;
 
 	@Override
-	public Indirizzo convert(Long id) {	
+	public Indirizzo convert(Long id) {
 		return indirizzoServ.findById(id).get();
 	}
 

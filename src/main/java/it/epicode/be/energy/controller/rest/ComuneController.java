@@ -23,19 +23,19 @@ import it.epicode.be.energy.model.Comune;
 import it.epicode.be.energy.service.ComuneService;
 
 @RestController
-@RequestMapping(path ="/api")
+@RequestMapping(path = "/api")
 @SecurityRequirement(name = "bearerAuth")
 public class ComuneController {
-	
+
 	@Autowired
 	ComuneService comuneServ;
-	
+
 	@GetMapping(path = "/comune")
 	@PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USER')")
 	@Operation(description = "Ricerca di TUTTI i comuni italiani")
 	public ResponseEntity<Page<Comune>> findAll(Pageable pageable) {
 		Page<Comune> findAll = comuneServ.findAll(pageable);
-		
+
 		if (findAll.hasContent()) {
 			return new ResponseEntity<>(findAll, HttpStatus.OK);
 		} else {
@@ -43,21 +43,21 @@ public class ComuneController {
 		}
 
 	}
-	
+
 	@GetMapping(path = "/comune/{id}")
 	@PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USER')")
 	@Operation(description = "Ricerca dei comuni italiani per id")
 	public ResponseEntity<Comune> findById(@PathVariable(required = true) Long id) {
 		Optional<Comune> find = comuneServ.findById(id);
 
-		if (find.isPresent()) { 
+		if (find.isPresent()) {
 			return new ResponseEntity<>(find.get(), HttpStatus.OK);
 		} else {
 			return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
 		}
 
 	}
-	
+
 	@DeleteMapping(path = "/comune/{id}")
 	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@Operation(description = "Cancellazione dei comuni italiani per id")
@@ -66,7 +66,7 @@ public class ComuneController {
 		return new ResponseEntity<>("Comune cancellato!", HttpStatus.OK);
 
 	}
-	
+
 	@PostMapping(path = "/comune")
 	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@Operation(description = "Inserimento nuovo comune nel Db")
@@ -75,7 +75,7 @@ public class ComuneController {
 		return new ResponseEntity<>(save, HttpStatus.OK);
 
 	}
-	
+
 	@PutMapping(path = "/comune/{id}")
 	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@Operation(description = "Modifica dei comuni italiani per id")
