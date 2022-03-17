@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import it.epicode.be.energy.exceptions.EnergyException;
 import it.epicode.be.energy.model.Cliente;
 import it.epicode.be.energy.model.Fattura;
+import it.epicode.be.energy.model.Indirizzo;
 import it.epicode.be.energy.repository.ClienteRepository;
 import it.epicode.be.energy.repository.FatturaRepository;
 import it.epicode.be.energy.repository.IndirizzoRepository;
@@ -98,8 +99,14 @@ public class ClienteService {
 	public void delete(Long id) {
 		if (clienteRepo.findById(id).isPresent()) {
 			Cliente delete = clienteRepo.findById(id).get();
-			delete.setSedeLegale(null);
-			delete.setSedeOperativa(null);
+			Indirizzo sedLeg = indirizzoRepo.findById(delete.getSedeLegale().getId()).get();
+			Indirizzo sedOpe = indirizzoRepo.findById(delete.getSedeOperativa().getId()).get();
+			sedLeg.setComune(null);
+			sedOpe.setComune(null);
+			List<Fattura> fattureCliente = fatturaRepo.findByClienteId(id);
+			for (Fattura f : fattureCliente) {
+				fatturaRepo.delete(f);
+			}		
 			clienteRepo.deleteById(id);
 		} else {
 			throw new EnergyException("Cliente non cancellato/trovato!");
