@@ -80,6 +80,7 @@
 		<p>
 			Comune sede legale: <select th:field="*{sedeLegale.comune}"
 				name="sedeLegale">
+				<!--  <option selected value=""> -- select an option -- </option> -->
 				<option th:each="c : ${listaComuni}" th:value="${c.id}"
 					th:text="${c.nome}" />
 			</select>

@@ -30,8 +30,11 @@ public class Indirizzo extends BaseEntity {
 
 	@Override
 	public String toString() {
-		return via + " " + civico + ", " + localita + ", " + cap + ", " + comune.getNome() + ", "
-				+ comune.getProvincia().getSigla();
+		if (this.comune != null && !this.via.isBlank()) {
+			return via + " " + civico + ", " + localita + ", " + cap + ", " + comune.getNome() + ", "
+					+ comune.getProvincia().getSigla();
+		}
+		return "Indirizzo non completo!";
 	}
 
 }
