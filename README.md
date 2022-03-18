@@ -64,9 +64,9 @@ Inoltre è implementata la possibilità di autenticarsi e registrarsi sia come '
 
 Sarà possibile utilizzare SwaggerOpenApi per testare i servizi ed accedere alla documentazione tramite l'endpoint : http://localhost:8080/swagger-ui.html
 
-Qui sarà richiesta l'autenticazione per utilizzare la maggior parte dei servizi esposti come: http://localhost:8080/api/**
+Qui sarà richiesta l'autenticazione per utilizzare la maggior parte dei servizi esposti come: http://localhost:8080/api/
 
-mentre sarà sempre possibile accedere ai servizi di signup e login tramite endpoint: http://localhost:8080/auth/**
+mentre sarà sempre possibile accedere ai servizi di signup e login tramite endpoint: http://localhost:8080/auth/
 
 
 # Di seguito un tracciato di esempio in formato JSON per l'inserimento di un nuovo cliente tramite servizio REST da Swagger-UI/Postman:
